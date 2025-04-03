@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>장바구니 - Bonanza</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <!-- Bootstrap & Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Do Hyeon", sans-serif;
+        background-color: #f5f9f5;
+      }
+
+      .cart-card {
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .cart-item {
+        border-bottom: 1px solid #ddd;
+        padding: 1rem 0;
+      }
+
+      .cart-item:last-child {
+        border-bottom: none;
+      }
+
+      .cart-title {
+        color: #228b22;
+        margin-bottom: 1.5rem;
+      }
+
+      .total-row {
+        font-weight: bold;
+        font-size: 1.1rem;
+        border-top: 2px solid #ccc;
+        padding-top: 1rem;
+      }
+
+      .btn-checkout {
+        background-color: #228b22;
+        color: white;
+      }
+
+      .btn-checkout:hover {
+        background-color: #1e7a1e;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 🔹 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+      <a class="navbar-brand" href="index.html">Bonanza</a>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <!-- 장바구니 버튼 -->
+        <a href="cart.html" class="btn btn-outline-dark position-relative">
+          <i class="bi-cart-fill me-1"></i>
+          장바구니
+          <span
+            id="cart-count"
+            class="badge bg-dark text-white ms-1 rounded-pill"
+            >0</span
+          >
+        </a>
+
+        <!-- 로그인 영역 (딱 하나만!) -->
+        <div id="login-form" class="text-end p-3">
+          <input
+            type="text"
+            id="login-id"
+            placeholder="아이디"
+            class="form-control d-inline w-auto me-2"
+          />
+          <input
+            type="password"
+            id="login-pw"
+            placeholder="비밀번호"
+            class="form-control d-inline w-auto me-2"
+          />
+          <button id="login-btn" class="btn btn-success btn-sm">로그인</button>
+        </div>
+
+        <!-- 로그인 후 영역 -->
+        <div id="user-area" class="text-end p-3" style="display: none">
+          <span><strong id="user-name"></strong></span>
+          <span id="subscription-status" class="badge bg-success small"></span>
+          <button id="logout-btn" class="btn btn-secondary btn-sm ms-2">
+            로그아웃
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 장바구니 콘텐츠 -->
+    <div class="container my-5">
+      <div class="cart-card">
+        <h2 class="cart-title">🛒 나의 장바구니</h2>
+
+        <div id="cart-items-container">
+          <!-- 장바구니 상품 목록이 여기에 렌더링됨 -->
+        </div>
+
+        <div class="total-row d-flex justify-content-between mt-4">
+          <span>총 합계</span>
+          <span id="total-price">₩0</span>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+          <a href="index.html" class="btn btn-outline-secondary w-50"
+            >← 계속 쇼핑하기</a
+          >
+          <button id="clear-cart" class="btn btn-danger w-50">
+            장바구니 비우기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("cart-items-container");
+        const totalPriceEl = document.getElementById("total-price");
+        const clearBtn = document.getElementById("clear-cart");
+        const cartCount = document.getElementById("cart-count");
+
+        const loginForm = document.getElementById("login-form");
+        const loginId = document.getElementById("login-id");
+        const loginPw = document.getElementById("login-pw");
+        const loginBtn = document.getElementById("login-btn");
+        const subscriptionStatus = document.getElementById(
+          "subscription-status"
+        );
+
+        const userArea = document.getElementById("user-area");
+        const userName = document.getElementById("user-name");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        // 로그인 상태 갱신
+        function updateLoginUI() {
+          const isLogin = localStorage.getItem("isLogin") === "true";
+          const username = localStorage.getItem("username");
+          const isSubscriber = localStorage.getItem("isSubscriber") === "true";
+
+          // 로그인/로그아웃 영역
+          if (userArea && userName && subscriptionStatus) {
+            if (isLogin && username) {
+              if (loginForm) loginForm.style.display = "none";
+              userArea.style.display = "block";
+
+              if (username === "admin") {
+                userName.textContent = "관리자 모드입니다.";
+                subscriptionStatus.textContent = ""; // 관리자이므로 구독 표시 없음
+                subscriptionStatus.style.display = "none";
+              } else {
+                userName.textContent = `VIP ${username} 님 환영합니다!`;
+                subscriptionStatus.textContent = isSubscriber
+                  ? "✅ 구독중"
+                  : "";
+                subscriptionStatus.style.display = "inline";
+              }
+            } else {
+              if (loginForm) loginForm.style.display = "block";
+              userArea.style.display = "none";
+            }
+          }
+        }
+
+        loginBtn.addEventListener("click", () => {
+          const id = loginId.value.trim();
+          const pw = loginPw.value.trim();
+
+          if (
+            (id === "admin" && pw === "123") ||
+            (id === "123" && pw === "123")
+          ) {
+            localStorage.setItem("isLogin", "true");
+            localStorage.setItem("username", id);
+            localStorage.setItem("isAdmin", id === "admin" ? "true" : "false");
+            updateLoginUI();
+          } else {
+            alert("아이디 또는 비밀번호가 틀렸습니다.");
+          }
+        });
+
+        logoutBtn.addEventListener("click", () => {
+          localStorage.clear();
+          updateLoginUI();
+        });
+
+        updateLoginUI();
+
+        // 장바구니 표시
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cartCount.textContent = cart.length;
+
+        if (cart.length === 0) {
+          container.innerHTML =
+            "<p class='text-muted'>장바구니가 비어 있습니다.</p>";
+          totalPriceEl.textContent = "₩0";
+          clearBtn.disabled = true;
+          return;
+        }
+
+        let total = 0;
+        let html = "";
+        cart.forEach((item) => {
+          total += parseInt(item.price);
+          html += `
+            <div class="cart-item d-flex justify-content-between align-items-center">
+              <div>
+                <strong>${item.name}</strong><br />
+                <small class="text-muted">${Number(
+                  item.price
+                ).toLocaleString()}원</small>
+              </div>
+              <i class="bi bi-bag"></i>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+        totalPriceEl.textContent = `${total.toLocaleString()}원`;
+
+        clearBtn.addEventListener("click", function () {
+          if (confirm("장바구니를 비우시겠습니까?")) {
+            localStorage.removeItem("cart");
+            location.reload();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

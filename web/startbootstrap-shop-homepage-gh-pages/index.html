@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Bonanza ecommerce</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+    <link />
+  </head>
+  <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- 경고 알림 메시지 -->
+      <div id="alert-message" class="alert alert-warning text-center" style="display:none;">
+      ⚠ 경고가 누적되었습니다.
+      </div>
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">보난자</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >처음으로</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html"> 기업소개</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >상품 구매</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="all_porduct.html"
+                    >전체 상품</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="popular.html">인기 상품</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="new.html">알.못 상품</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a href="cart.html" class="btn btn-outline-dark">
+              <i class="bi-cart-fill me-1"></i>
+              장바구니
+              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </a>
+          </div>
+          <!-- 로그인 영역 (딱 하나만!) -->
+          <div id="login-form" class="text-end p-3">
+            <input type="text" id="login-id" placeholder="아이디" class="form-control d-inline w-auto me-2" />
+            <input type="password" id="login-pw" placeholder="비밀번호" class="form-control d-inline w-auto me-2" />
+            <button id="login-btn" class="btn btn-success btn-sm">로그인</button>
+          </div>
+
+          <!-- 로그인 후 영역 -->
+          <div id="user-area" class="text-end p-3" style="display: none;">
+            <span><strong id="user-name"></strong></span>
+            <span id="subscription-status" class="badge bg-success small"></span>
+            <button id="logout-btn" class="btn btn-secondary btn-sm ms-2">로그아웃</button>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+    <!-- Header-->
+    <header class="py-5" style="padding-bottom: 0; background-color: #228b22;">
+        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner rounded overflow-hidden" style="max-height: 400px;">
+            
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <img
+                src="https://preview.colorkit.co/color/228b22.png?size=wallpaper&static=true"
+                class="d-block w-100"
+                alt="슬라이드1"
+                style="height: 400px; object-fit: cover;"
+              />
+              <div class="carousel-caption d-none d-md-block text-white">
+                <h1 class="display-4 fw-bolder">Welcome to Bonanza</h1>
+                <p class="lead fw-normal text-white-50 mb-0">친환경 유기농 전문 온라인 쇼핑몰</p>
+              </div>
+            </div>
+    
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <img
+                src="img\흑염소.jpg"
+                class="d-block w-100"
+                alt="슬라이드2"
+                style="height: 400px; object-fit: cover;"
+              />
+              <div class="carousel-caption d-none d-md-block text-white">
+                <h1 class="display-4 fw-bolder"></h1>
+                <p class="lead fw-normal text-white-50 mb-0"></p>
+              </div>
+            </div>
+    
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+              <img
+                src="img\이벤트5.png"
+                class="d-block w-100"
+                alt="슬라이드3"
+                style="height: 400px; object-fit: cover;"/>
+              <div class="carousel-caption d-none d-md-block text-white">
+              </div>
+            </div>
+          </div>
+    
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">이전</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">다음</span>
+          </button>
+        </div>
+      </div>
+    </header>    
+    <!-- Section-->
+    <section id="recommended-products" class="py-5" style="display: none;">
+      <div class="container">
+        <h2>📆 오늘의 추천 상품</h2>
+        <p>보난자와 함께 정직한 한끼 어떠세요?</p>
+        <div class="row mt-4">
+          <!-- 실제 추천 상품 카드 -->
+          <!-- 추천 상품 카드 -->
+          <div class="col-md-4" data-id="recommend1" data-name="유기농 꿀" data-price="12000">
+            <div class="card shadow">
+              <img
+                class="card-img-top"
+                src="https://m.ssarijai.com/web/product/big/20231130/01da3ecd086effc3ca360fa39e769027.jpg"
+                alt="..."
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">단단한 두부(420g)</h5>
+                <p class="card-text">3000원</p>
+
+                <div class="admin-controls" style="display:none;">
+                  <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                  <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                  <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+                </div>
+
+               <!-- Product actions-->
+               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <button class="btn btn-outline-dark mt-auto add-to-cart" href="#" >장바구니 담기</button>
+                </div>
+               </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4" data-id="recommend1" data-name="유기농 꿀" data-price="12000">
+            <div class="card shadow">
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/050816001/050816001_1_300.jpg"
+                alt="..."
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">콩나물(300g)</h5>
+                <p class="card-text">2000원</p>
+
+                <div class="admin-controls" style="display:none;">
+                  <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                  <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                  <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+                </div>
+
+               <!-- Product actions-->
+               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <button class="btn btn-outline-dark mt-auto add-to-cart" href="#" >장바구니 담기</button>
+                </div>
+               </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4" data-id="recommend1" data-name="유기농 꿀" data-price="12000">
+            <div class="card shadow">
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/060201008/060201008_1_568.jpg"
+                alt="..."
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">유정란(15개입)</h5>
+                <p class="card-text">7050(원)</p>
+
+                <div class="admin-controls" style="display:none;">
+                  <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                  <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                  <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+                </div>
+
+               <!-- Product actions-->
+               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <button class="btn btn-outline-dark mt-auto add-to-cart" href="#" >장바구니 담기</button>
+                </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+     
+    <section id="general-products" class="py-5" style="display: none;">
+      <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          <div class="col mb-5" data-id="product1" data-name="흑염소 진액(30개입)" data-price="118800">
+            <div class="card h-100">
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/120101118/120101118_1_568.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">흑염소 진액(30개입)</h5>
+                  <!-- Product price-->
+                  118,800(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto add-to-cart" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product2">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+              친환경
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/060107004/060107004_1_568.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">돼지불고기용-우리보리살림돼지(500g)</h5>
+                  <!-- Product reviews-->
+                  <div
+                    class="d-flex justify-content-center small text-warning mb-2"
+                  >
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  34,842(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product3">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                친환경
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://cdn.oasis.co.kr:48581/product/64683/thumb/7b014e5e-7d4c-4943-b492-6ef25a3347d2.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">금귤/유,무(500g)</h5>
+                  <!-- Product price-->
+                  6509(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product4">
+            <div class="card h-100">
+              <!-- Product image-->
+              <!-- Sale badge-->
+              <div
+              class="badge bg-dark text-white position-absolute"
+              style="top: 0.5rem; right: 0.5rem"
+            >
+              인기상품
+            </div>
+              <img
+                class="card-img-top"
+                src="https://m.ssarijai.com/web/product/big/20231130/01da3ecd086effc3ca360fa39e769027.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">단단한 두부(420g)</h5>
+                  <!-- Product reviews-->
+                  <div
+                    class="d-flex justify-content-center small text-warning mb-2"
+                  >
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  3000(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                인기상품
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/120202003/120202003_1_568.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">건강한보 꽃사슴녹용액(수험생/60봉*90ml)</h5>
+                  <!-- Product price-->
+                  <!-- <span class="text-muted text-decoration-line-through"
+                    >$50.00</span
+                  > -->
+                  140,000(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product6">
+            <div class="card h-100">
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/120201002/120201002_1_568.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">건강한보 홍삼액(6년근/60봉)</h5>
+                  <!-- Product price-->
+                  148,200(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product7">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                신상
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://contents.kyobobook.co.kr/sih/fit-in/400x0/gift/pdt/1351/hot1730357202926.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">오가닉코튼 바디수트(섬유/영유아)</h5>
+                  <!-- Product reviews-->
+                  <div
+                    class="d-flex justify-content-center small text-warning mb-2"
+                  >
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  <span class="text-muted text-decoration-line-through"
+                    >38,000(원)</span
+                  >
+                  35000(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >장바구니 담기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5" data-id="product8">
+            <div class="card h-100">
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://shop.hansalim.or.kr/shopping/is/itm/060104023/060104023_1_300.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">설도다짐육(냉장/안심대안/200g)</h5>
+                  <!-- Product reviews-->
+                  <div
+                    class="d-flex justify-content-center small text-warning mb-2"
+                  >
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  21,070(원)
+                </div>
+              </div>
+              <!-- 경고 알림 메시지 -->
+              <div class="admin-controls" style="display:none;">
+                <p class="text-danger">⚠ 경고 횟수: <span class="warning-count">0</span></p>
+                <button class="btn btn-sm btn-danger give-warning">경고 주기</button>
+                <button class="btn btn-sm btn-outline-danger delete-product">상품 삭제</button>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#">장바구니 담기</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="py-5" style="background-color: #000">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Bonanza_2</p>
+      </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Core theme JS-->
+    <script>
+        function showSubscriberPopup() {
+          const popup = document.getElementById("subscriber-popup");
+          if (popup) popup.style.display = "flex";
+        }
+
+        function closePopup() {
+          const popup = document.getElementById("subscriber-popup");
+          if (popup) popup.style.display = "none";
+        }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 요소 정의
+        const loginForm = document.getElementById("login-form");
+        const loginId = document.getElementById("login-id");
+        const loginPw = document.getElementById("login-pw");
+        const loginBtn = document.getElementById("login-btn");
+    
+        const userArea = document.getElementById("user-area");
+        const userName = document.getElementById("user-name");
+        const logoutBtn = document.getElementById("logout-btn");
+        const alertMessage = document.getElementById("alert-message");
+    
+        const cartCountBadge = document.querySelector(".badge");
+        const subscriptionStatus = document.getElementById("subscription-status");
+    
+        const generalSection = document.getElementById("general-products");
+        const recommendSection = document.getElementById("recommended-products");
+        const recommendText = document.getElementById("day-recommendation-text");
+        const cardContainer = document.getElementById("recommend-card-container");
+    
+        function updateCartCount() {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          if (cartCountBadge) cartCountBadge.textContent = cart.length;
+        }
+    
+        function updateUI() {
+          const isLogin = localStorage.getItem("isLogin") === "true";
+          const username = localStorage.getItem("username");
+          const isSubscriber = localStorage.getItem("isSubscriber") === "true";
+    
+          if (isLogin && username) {
+            loginForm.style.display = "none";
+            userArea.style.display = "block";
+    
+            if (username === "admin") {
+              userName.textContent = "관리자 모드입니다.";
+              subscriptionStatus.style.display = "none";
+              // 관리자일 경우 경고 컨트롤 표시
+              document.querySelectorAll(".admin-controls").forEach(el => {
+                el.style.display = "block";
+              });
+
+            } else {
+              userName.textContent = `VIP ${username} 님 환영합니다!`;
+              subscriptionStatus.textContent = isSubscriber ? "✅ 구독중" : "❌ 비구독자";
+              subscriptionStatus.style.display = "inline";
+            }
+          } else {
+            loginForm.style.display = "block";
+            userArea.style.display = "none";
+          }
+        }
+    
+        function renderTodayProduct() {
+          const isLogin = localStorage.getItem("isLogin") === "true";
+          const isAdmin = localStorage.getItem("isAdmin") === "true";
+    
+    
+          if (isLogin && !isAdmin) {
+            // 로그인한 일반 사용자 → 추천 상품만 보여줌
+    recommendSection.style.display = "block";
+    generalSection.style.display = "block";
+          } 
+          else {
+            // 비로그인 또는 관리자 → 일반 상품만 보여줌
+            recommendSection.style.display = "none";
+            generalSection.style.display = "block";
+          }
+        }
+    
+        function bindEventListeners() {
+          loginBtn.addEventListener("click", () => {
+          const idValue = loginId.value.trim();
+          const pwValue = loginPw.value.trim();
+
+          const isValidLogin =
+            (idValue === "admin" && pwValue === "123") ||
+            (idValue === "123" && pwValue === "123");
+
+          if (isValidLogin) {
+            localStorage.setItem("isLogin", "true");
+            localStorage.setItem("username", idValue);
+
+            const isAdmin = idValue === "admin";
+            localStorage.setItem("isAdmin", isAdmin ? "true" : "false");
+
+            const isSubscriber = idValue === "123";
+            localStorage.setItem("isSubscriber", isSubscriber ? "true" : "false");
+
+            updateUI();
+            renderTodayProduct();
+            updateCartCount();
+
+            // ✅ 팝업은 로그인 성공 & 일반 사용자일 때만 실행
+            if (!isAdmin) {
+              showSubscriberPopup();
+            }
+          } else {
+            alert("아이디 또는 비밀번호가 틀렸습니다!");
+          }
+        });
+          
+          logoutBtn.addEventListener("click", () => {
+            localStorage.clear();
+            updateUI();
+            location.reload();
+          });
+    
+          document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("give-warning")) {
+              const productCard = e.target.closest("[data-id]");
+              const productId = productCard.dataset.id;
+              let count = Number(localStorage.getItem(`warning_${productId}`)) || 0;
+              count++;
+              localStorage.setItem(`warning_${productId}`, count);
+              productCard.querySelector(".warning-count").textContent = count;
+    
+              alertMessage.style.display = "block";
+              setTimeout(() => {
+                alertMessage.style.display = "none";
+              }, 2000);
+            }
+    
+            if (e.target.classList.contains("delete-product")) {
+              e.preventDefault(); // 기본이동막기
+              
+              const productCard = e.target.closest(".col");
+              const productId = productCard.dataset.id;
+              localStorage.removeItem(`warning_${productId}`);
+              productCard.remove();
+            }
+    
+            if (e.target.classList.contains("add-to-cart")) {
+              e.preventDefault();  // ✅ 이 한 줄을 꼭 추가하세요!
+
+              const productCard = e.target.closest(".col");
+              const name = productCard.getAttribute("data-name");
+              const price = productCard.getAttribute("data-price");
+    
+              let cart = JSON.parse(localStorage.getItem("cart")) || [];
+              cart.push({ name, price });
+              localStorage.setItem("cart", JSON.stringify(cart));
+    
+              updateCartCount();
+              alert(`🛒 '${name}' 상품이 장바구니에 담겼습니다.`);
+            }
+          });
+        }
+
+        // 초기화
+        updateUI();
+        renderTodayProduct();
+        updateCartCount();
+        bindEventListeners();
+      });
+    </script>
+
+    <!-- ✅ 구독자 혜택 안내 모달 -->
+    <div id="subscriber-popup" class="modal" tabindex="-1" style="display:none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">🎁 구독자 혜택 안내</h5>
+            <button type="button" class="btn-close" onclick="closePopup()"></button>
+          </div>
+          <div class="modal-body">
+            <p>첫 구매 3개월 무료 구독!</p>
+            <p>화끈한 적립금과 알뜰살뜰한 보난자 쿠폰까지!</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" onclick="closePopup()">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .modal {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </body>
+</html>
